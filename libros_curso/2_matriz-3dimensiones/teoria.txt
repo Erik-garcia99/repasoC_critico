@@ -1,0 +1,29 @@
+C ofrece la posibilidad de alamcenar arreglo de varias dimensiones aunque por lo general no son tan trabajados con bideimencional es mas que suficiente para cosas basicas o intermedias 
+
+es facil imaginar un arreglo de 3 diemciones, podemos imaginarnoslo como un cubo. 
+
+un arreglo tridimencional es un arreglo de matrices combinados juntos para fromar la produndidad de una tercera dimencion. 
+
+un arreglo tridimencionl (cubo) se constituye con filas (dimencion vertical) columnas (dimencion horizontal) y planos (dimension en profundidad) 
+
+un ejemplo de una declaracion puede ser 
+
+int equipos[3][15][10]; 
+
+un ejemplo tipido de un arrego de 3 dimensiones es el modelo "libro". donde cada apagina del libro es un arreglo bidimencioanl constituido por filas y columnas. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

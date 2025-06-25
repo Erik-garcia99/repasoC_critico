@@ -1,0 +1,110 @@
+
+una variable PUNTERO es una varibale que contiene direcciones de otras varibales. una varibale comun en C contiene valores, en cambio un puntero CONTIENE DIRECCIONES DE MEMORIA DONDE SE ALMACENAN DATOS. 
+
+-cunado una varibale se declara, se asocian 3 atributos fundamentales de la misma. su nombre, su tipo y su direccion en memoria. 
+
+como puede ser: 
+
+int n; -> tipo (entero) - nombre (n) - direccion en memoria (0xFFA)
+
+al valor de una varibale que puede acceder por medio de su nombre, por ejemplo se puede imprimir el valor de n con:  
+
+    prinft("%d",n); 
+
+a la direccion de la varibale se accede por medio del OPERARO DE DIRECCION <<&>> por ejemplo podemos imprimir 
+
+printf("%p",&n);
+
+
+----------------------------------
+
+10.2 concepto de puntero :
+
+cada vez que se declare una varibale en C el compilador estabelce un area de memoria para almacenar el contenodo de la varibale, por ejemplo cunado se declara una varibale entera (int) el compilador asigna 2 bytes en memoria. 
+
+un puntero es una direccion de memoria. un puntero en C idnica en donde encoentrar algo. 
+los punteros se rigen por reglas basicas como: 
+
+-un puntero es una varibale como cualquier otra 
+-una varibale puntero contiene una direccion que apunta a otra posicion en memoria 
+-en esa posicion se alamcenan los datos a los que apunta el puntero
+-un puntero apunta a una varibale de memoria. 
+
+-> una varibale puntero como cualquier otra vairbale se le asignara un espacio en memoria, solo que cunado se quiera haga referencia a esta, lo que va a traer no sera un valor si no que el compilador ira a ese espacio en memoria se dara cuenta que no es el valor de X varibale si no que es la direccion de otra por lo que ira a X direccion que guardaba el puntero y ahora si retorna el valor a cual apuntaba la varibale apuntador. 
+
+
+---------------------------------------
+
+10.2.1 declaracion de punteros 
+
+para declarar una varibale como puntero se hace uso del <<*>> antes de su nombre y despues del tipo de dato ejmp: 
+
+int *ptr1;
+long* ptr2;
+char* ptr3;
+
+un operador <<*>> en una declaracion indica que la variabel declarada almacena una direccion de un tipo de dato especifico. 
+
+-------------------------------------------------
+
+10.2.2 incialcion de punteros 
+
+como cualquier otra varibale en C un puntero debe ser inicalizado y en este caso con mas razon, pero porque?, recrodemos que un puntero apunta a memeoria, por lo que si no se incializa y se manda a llamar, lo que va a devolver sera basura de memoria esto puede o no ser perjudicial, por ejemplo si es el inicio de una cola, perder al que va antes de el es fatal porque ahora se perdera el hilo de la cola. 
+
+pero para asignar una direccion de meoria a un puntero se utiliza el operador de referencia <<&>> por ejemplo: 
+
+&valor;
+
+-asignar memoria (estaticamante) defineidno una varibale y que el puntero apunte al valor de la variable 
+
+int i;
+int *p;
+
+p= &i;
+
+-asignar un valor a la direccion de memoria 
+
+*p = 50; <- este modifica <<i>> que ahora vale 50. 
+
+el operador <<&>> devuelve la direccion de la varibale a la cual se aplica. 
+
+es un error asignar un valor a un contenido de una variable puntero si previamnete no se ha incializado con la direccion de una varibale o bien le ha asignaod dinanicament ememoria 
+float *px;
+
+*px = 23.5; <- erro, px no contiene direccion 
+
+existen un segundo memoto de iniclizacion es medinate asignacion dinamica de memoria. utiliza las funciones de asignacion de memoria <<malloc()>> , <<calloc()>> , <<realloc()>> y <<free()>>, 
+
+-----------------------------------------------------------
+
+10.2.3 indireccion de punteros. 
+
+el uso de un puntero para obtener el valor al que punta, se denomica <<indireccionar el puntero>>, para esto se utiliza el operadro de indireccion <<*>>
+
+-> en otras palabras, <<*>> funciona para decirle al compilador que la varibale es un apuntador y para tambien para obtener del valor de la direccion a la cual esta apuntando 
+
+como: 
+
+int edad;
+int *p_edad;
+
+p_edad = &edad;
+
+*p_edad = 50;
+
+--------------------------------------------------------------
+
+10.2.4 PG 347
+
+
+
+
+
+
+
+
+
+
+
+
+

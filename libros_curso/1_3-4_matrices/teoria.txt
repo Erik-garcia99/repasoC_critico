@@ -1,0 +1,79 @@
+3.4 - arreglos multidimensionales - matrices (pg 84 PDF)
+
+los arreglos mutidimencionales son aquellos que tienen mas de una dimension
+y en concecuente mas de una dimension.
+
+los arreglos multidimencionales mas conocidos son las matrices los cuales son de
+2 dimenciones, aunque tambin se pueden crea de 2, 3, 4, 5 dimseniones
+pero esos son mucho ma dificeles de manerar, con 2 dimensiones se basta y se sobra
+
+las filas las podemos etiquetae como 0 a m y las columnas de 0 a n.
+un elementos es direccionado por su direccion en fila y columna (m,n) una sintaxis
+basica para la declaracion de una matriz es
+
+<tipo_dato> <nombre_arreglo> [<numeroFilas>][<#columnas>];
+
+podemos ver un ejemplo 
+
+char pantalla[25][80]; -> un arreglo de 25 filas x 80 columnas - de tipo caracter 
+
+int puestos[6][8]; 
+
+a una matriz tambien se le puede conocer un array de arrays, esto, un arreglo normal unidimensiona un elemento es un entero, un caracter, etc.., en una matriz cada posicion es otro arreglo, por lo que el nivel mayor apunte o se dirige a un arreglo dentro de el, si es bidimensional entonces un arreglo adentro el dato que quiere buscar ya es de tipo primitivo. 
+
+pero como sabemos puede ser otro arreglo si es 3, 4, 5 dimensiones. 
+
+
+
+3.4.1 - incializacion de arreglo multidimencionales - PG (86 PDF)
+
+un arreglo mutidimensional se puede iniciar como e de 1 dimension (unidimensional), la incialacion consta de valores constantes separados por llaves, hay varias formar pero una de las ms claras es: 
+
+int tabla[2][3] = { {51,52,53},
+                    {54,55,56}};
+cada lista de elemtnos que es un arreglo, poque la matriz es de 2 filas x 3 columnas, este es un modo de declararlo mucho mas explicito. 
+
+aunque no es lo normal que se incialicen una matriz con valores, dado que por lo general se va rellenando conforme va avanzando el programa 
+
+3.4.2 acceso a los elemntos de los arreglos bidimensionales (PG- 87 - PDF).
+
+la forma en como acceder a los elemtos de una matriz es muy similiar a como se accede a un arerglo unidimensional solo que en una matriz se le debe de declarar la fila y columna, por lo que en vez de tener un incide una matriz tiene 2 INDICES  
+
+-> insersion 
+
+<nombre arrelo>[indice fila][numero de columna] = valor del elementos 
+
+extraccion de elementos 
+
+<variable> = <nombre arreglo>[indice fila][indice columna];
+
+
+3.4.3 lectura y escritura de elementos de arreglo bidimensionales 
+
+las funciones de entrada y salida se aplican de igual froma a los elemntos de un arreglo bidimensional. 
+
+ejemplo: 
+
+int tabla[3][4]; 
+
+double resistencias[4][5];
+
+scanf("%d" , &tabla[2][3]);
+printf("%4d", tabla[1][1]);
+scanf("%f", &resistencias[2][4]);
+
+
+
+
+3.4.4 acceso a elementos mediante bucles 
+
+la froma mas comun de ingrear a un arreglo es mediante bucles, para acceder a uno bidiminecional es medinate 2 ciclos anidados 
+
+int indiceFila, indiceCol;
+
+for(indiceFila = 0 ; indiceFil < NumFilas ; ++indiceFil){
+    for(indiceCol = 0 ; indiceCol < NumCol; ++indiceCol){
+
+        procesar_elemetno[indiceFila][indiceCol]= elemtno;
+    }
+}

@@ -1,0 +1,26 @@
+en C los arreglos de pasan por referencia (direccion - para la primera posicion del arrelo que es inicio en memoria en donde esta almacenado el arreglo, un arrelo en memoria se alamcena en una ilera, una estatica). 
+
+hay varias manera de pasar el tamanio de estos arreglos o matrices, puede ser, si es un tamanio definido,  podemso agregar un <<#define>> en el que definamos el tamanio 
+
+#define MAX 100
+double datos[MAX]
+
+double sumaDeDatos(double datos[MAX]); 
+
+o, se puede mandar el tamanio igual por parametro si no es un tamanio definido si no sera dinamico, no simepre igal 
+
+double sumaDeDatos(double datos[], int n);
+
+incluso sin el tamanio, podemos usar el operador <<sizeof>>
+
+double sumaDatos(double *datos){
+
+    int tamanio = sizeof(datos) / sizeof(datos[0]);
+
+}
+
+esa operacion calcula el tamanio total del arreglo divieindo el tamanio totoal en bytes dividio entre un elementos del mismo que igual es  bytes. 
+
+
+
+
