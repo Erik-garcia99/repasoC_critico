@@ -100,6 +100,38 @@ p_edad = &edad;
 
 
 
+-------------------------------------------------------------
+10.7.1 Punteros VS Arreglos 
+
+tenemos los ejemplos en donde se implementa la misma funcion y porgrama solo que en uno usamos puntereos y otro arreglos, seran en C 
+
+
+--------------------------------------------------------------
+
+10.8 aritmetica de punteros -> pg 354 PDF 
+
+un puntero es una vribale que se puede modificar, a diferencia del arreglo, en cunto su tamanio por ejemplo un arreglo de 10 elementos sera de 10 elementos por todos siempre y para siempre amen, al menso que se modifique especidifcamente ese tamanio pero seria borrar todo su contenido, un arreglo de tamanio estatico ocupe o no ocupe todo sus espacios ocupa x espacio en memoria por lo que si no se ocupan sus espacios es un desperdicio de espacio, un puntero es una varibale mas por lo que se pueden realizan ciertas operaciones arimeticas sobre ellos. 
+
+a un puntero se le puede sumar o restar un entero, esto que hace para que apunte N elemenos adelante o atras de la posicion actual. 
+
+podemos ver en e siguiente ejemplos 
+
+int v[10]; // -> arreglo estativo de 10 posiciones de tipo entero 
+
+int *P; //puntero sin inicalizar. 
+
+p = v
+
+(v+4); // apunta al elementos 4
+
+p = p+6;  // contiene la direccion del 7mo elementos 
+
+OPERACIONES NO VALIDAS 
+
+-no se pueden sumar dos Punteros
+-no se pueden multiplicar 2 punteros (creo que puntero por constante si)
+-no se pueden dividir dos punteros 
+
 
 
 
