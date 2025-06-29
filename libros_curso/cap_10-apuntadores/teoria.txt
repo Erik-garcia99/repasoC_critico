@@ -96,15 +96,131 @@ p_edad = &edad;
 
 10.2.4 PG 347
 
+-> punteros y verificacion de tipos 
+
+los punteros se anlzan a tipo de dato especifico, eso quiere decir que si se define un puntero como <<float>> no lo podemos asignar a otra varibale puntero <<int>>, (asi tal cual no, se puede hacer un casting, lo que es convertir una varibale en otra solo asi, pero por si solo no se puede. )
+
+-----------------------------------------------------------------
+
+10.3 PUNTEROS - NULL y void
+
+un puntero inicado adecuadamnte apunta a una posicion en memoria en especifico, pero al igual que una varibale normal podemos delcarar mas no inicar la varibale, esta varibale puntero a punta a una direccion random de la memoria a lo que se le concoe como basura. 
+
+para inicar un puntero correctamente pero aun no queremos que apunte a nada o aun no se decide a que varibale o valor se le asignara estan los valores NULL y void 
+
+-punteo nulo (NULL) no apunta a ninguna parte, un puntero nulo no direcciona a ningun dato valido en memoria. esto se hace asignanod a la variable <<NULL>>
+
+algunas funciones C tambein devuelven el valor NULL si enceuntran un error, como puede ser la asignacion de memoria dinamica 
+
+char *p_edad
+p=malloc(12 * sizeof(char));
+
+if(p == null) puts("error al asignar memoria");
+
+en C se puede declarar un puntero de modo que apunte a cualquier tipo de dato, es decri no se asgina un tipo de dato especidifco. el metood es declarar un puntero como un puntro <<void *>>, denominado puntero generico.
+
+void *ptr; 
+
+este puntero puede direccionar a cualquier posicion en memoria. pero el puntero no esta unido a un tipo de dato especidifco los puntero <<void>> pueden direccionar una varibale float, char o una pociion arbitraria o una cadena.
+
+-----------------------------------------------
+10.4 punteros a punteros 
+
+un puntero puede direccionar a otra varibale puntero, para esto en vez se asignar con un astericto se hace con 2 <<int **ptr_2>>
+
+int valor-e = 100;
+
+int ptr1 = &valor-e;
+int **ptr5 =&ptr1;
+
+en este caso lo quee esta pasando es que <<**ptr5>> contiene la direccion de <<*ptr1>> el cual tambien es un puntero a apunta a <<valor-e>> osea apunta a una variable que tiene la direccion de la varibale final. 
 
 
+----------------------------------------------------
+
+10.5 punteros y arreglos
+
+se pueden direccionar arreglos como si fueran punteros y punteros como si fueran arreglos. 
+
+10.5.1 nombres de arreglos como punteros 
+
+el nombre de un arreglo es un puntero, contiene la direccion en memoria de comienzo de la secueincia de elementos que forma el arreglo. es un puntero constante ya que no se puede modificar solo se puede acceder al indexar los elemntos del arreglo. 
+
+ejmp: 
+
+float v[10];
+float *p;
+float x =100.5;
+int j;
+
+for(j=0; j<10;j++){
+
+    v = &x;
+    p=v+4;
+
+    *(v+j) = j* 10.0; //accedera a la posicion en memoria que hay en la posicion V + incremento(j - lo que lleve j)
+
+}
 
 
+--------------------------------------------------------------------
+
+10.6 arreglos de punteros
+
+un array de punteros es un arreglo que contiene como elementos punteros. en donde cada uno de cuales aputan a un tipo de dato especifico. por ejemplo 
+
+int *ptr[10]; -> reserva un arreglo de 10 punteros a entreos 
 
 
+-----------------------------------------------------
+10.7 PUNTROS DE CADENAS 
+
+los punteros se puden utilizar en lugar de indices de arreglos, considerante el sigueinte arreglo 
+
+char alfabeto[27]="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+-> declaramos un puntero char 
+
+char *p;
+
+establecemos que <<p>> apunte al primre caracter del arreglo 
+
+p = &alfabeto[0];
+
+de modo que si imporimirmos ahora mismo 
+
+->printf("%c \n",*p); ->outpu = A
 
 
+ejemplos: 
+C:\Users\erikG\OneDrive\Escritorio\repasoC_crito\libros_curso\cap_10-apuntadores\EJMP_10_7_1-punteros_vs_arreglos.c
 
 
+-------------------------------------------------------------------
+
+
+10.8 aritmetica de punteros -> pg 354 PDF 
+
+un puntero es una vribale que se puede modificar, a diferencia del arreglo, en cunto su tamanio por ejemplo un arreglo de 10 elementos sera de 10 elementos por todos siempre y para siempre amen, al menso que se modifique especidifcamente ese tamanio pero seria borrar todo su contenido, un arreglo de tamanio estatico ocupe o no ocupe todo sus espacios ocupa x espacio en memoria por lo que si no se ocupan sus espacios es un desperdicio de espacio, un puntero es una varibale mas por lo que se pueden realizan ciertas operaciones arimeticas sobre ellos. 
+
+a un puntero se le puede sumar o restar un entero, esto que hace para que apunte N elemenos adelante o atras de la posicion actual. 
+
+podemos ver en e siguiente ejemplos 
+
+int v[10]; // -> arreglo estativo de 10 posiciones de tipo entero 
+
+int *P; //puntero sin inicalizar. 
+
+p = v
+
+(v+4); // apunta al elementos 4
+
+p = p+6;  // contiene la direccion del 7mo elementos 
+
+OPERACIONES NO VALIDAS 
+
+-no se pueden sumar dos Punteros
+-no se pueden multiplicar 2 punteros (creo que puntero por constante si)
+-no se pueden dividir dos punteros 
 
 
