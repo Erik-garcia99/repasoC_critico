@@ -224,3 +224,212 @@ OPERACIONES NO VALIDAS
 -no se pueden dividir dos punteros 
 
 
+----------------------------------
+ejericio 10.8.1 - conversion de caracteres PG - 356 PDF
+
+
+--------------------------------
+
+10.9 punteros cnstantes frente a punteros a constantes 
+
+un puntero constante es un puntero que no puede cambiar <<el puntero siempre apunta a la misma direccion de memoria>> pero los datos apuntados pueden ser cambiados. 
+
+por otra parte un puntero a una constante se puede modificar para apuntar a una constante diferente, pero los datos apuntados por el puntero no se pueden cambiar. <<la constante de toda la vida, lo que quiere hacer es poder cambiar la direccion de memoria a la cual quiere ahora apuntar>>
+
+--------------------------------------
+
+10.9.1 punteros constantes 
+
+para crear un puntero constante diferente de un nombre de un arreglo, se debe de utilizar el sigueinte formato 
+
+<tipo_de_dato> *const <nombre_puntero> = <direccion_de_varibale>;
+
+veamos el siguiente ejemplo: 
+
+int x;
+int y;
+int *const p1=&x;
+
+<<p1>> es un puntero CONSTANTE que apunta a <<x>>, por lo que <<p1>> es una constante pero <<*p1>> es una varibale, por lo que se puede cambiar el valor de <<*p1>> pero no <<p1>>
+
+por lo que la sigueinte asingnacion de valor es adecuado, porque aqui cambia el valor dentro de la seccion de memoria
+
+*p1 = &y;
+
+pero la sigueinte asignacion no es legal ya que se intenta cambiar el valro del puntero 
+
+
+----------------------------------------------------
+
+10.9.2 punteros a constantes 
+
+formato para definir un puntero a una constante es: 
+
+const <tipo de dato> *<nombre puntero> = <direccion de constante>;
+
+
+ejemplo: 
+
+const int x = 25;
+const int y = 50;
+const int *p1 = &x;
+
+en donde <<p1>> se define como un puntero a la constante <<x>>. 
+los datos son constantes y no el puntero. 
+en consecuecina se puede hacer que <<p1>> apunte a otra constaten 
+
+p1 = &y;
+
+sin embargo si se intenta cambiar el valor en donde actulamente apunta <<p1>> no se podra ya que los datos alamcenados son constantes, por lo que lo sigueinte no es valido 
+
+*p1 = 15;
+
+-> se quiere cambiar a 15 a lo que apunta <<p1>> que actualmente es <<y>>
+
+p1 - > y (50) -> *p1 = 15 -> y(15) -> no se puede cambiar el valor de 50
+
+
+creacion de un <<puntero a tipo constante >> se puede hacer como: 
+
+const char *apellido = "Ramirez";
+
+<<puntero constante >>
+
+float cargo(const float *v);
+
+
+
+-------------------------------------------------------------
+
+10.9.3 punteros constantes a constantes 
+
+el utlimo caso es crear <<punteros constantes a constantes>> utilizando el formato sigueinte: 
+
+const <tipo_de_dato_elemento> *const <nombre_puntero> = <direccion_de_constante>
+
+esta definicion se puede leer como <un tipo constante de dato y un puntero constante>, un ejemplo puede ser: 
+
+const int x = 25;
+const int *const p1 = &x; 
+
+indica que <<p1 es un puntero constante que apunta a la constante entera x>> 
+cualquier intento de modficar <<p1>> o <<*p1>> producira un error. 
+
+----------------------------------------------------------
+
+10.10 puntero como arguemnto de funciones PG 359 PDF 
+
+con frecuecnia se desea que una funcion calcule y devuelva mas de un valor o bien que modifique las variables que se pasan como arguementos. 
+
+cunado se le pasa una variable a una funcion <<paso por valor>> no se puede cambiar el valor de esa varibale, sin embargo si se pasa una varibale puntero <<paso por direccion>> se puede cambiar el valor de la variable. 
+
+veamos el siguiente ejemplo de la funcion 
+
+<<Incrementar5>> que incremeta un entero en 5 
+
+void Incrementar5(int *i){
+
+    *i += 5;
+
+}
+
+la llamada a esta funcion se realiza pasando una direccion que utilice es afuncion , por ejemplo para llamar a a funcion se utiliza 
+
+int i; 
+i=10;
+Incremento(&i);
+
+es posible mezca paso por referencia y por valor como en el sigueinte ejemplo:
+
+void func1(int *s, int t){
+
+    *s = 6;
+    t = 25;
+
+
+}
+
+invocando a la funcion 
+
+int i,j;
+i = 5;
+j = 7;
+func1(&i, j);
+
+cunado se retorna de la funcion, i=6 y j=7, j sigue siendo igual ya que se paso por valor 
+
+(en C por defecto el paso de parametros es por valor, C no tiene parametros por referencia se tienen que emular mediante el paso de la direccion utilizando los punteros )
+
+--------------------------------------------------------
+
+10.11 puntros a funciones PG 361 PDF 
+
+es posible tambein crear punteros que apunten a funciones, en lugar de direccionar datos los punteero de funciones apuntana a codigo ejecutable. en C se pueden asigar las direcciones inicales de funciones a punteros. 
+tales funciones se pueden llamar en un modo indireco, mediante un puntero cuyo valor es igual a la direccion icnial de la uncion en cuestion 
+
+veamos una sintaxis genreal 
+
+tipo_de_retorno (*punterofuncion) (<lista_parametros>);
+
+este fromato le indica al compilador que el punteroFunciones es un puntero a uan funcion que devuelve el tipo de dato <Tipo_de_retorno> y tiene una lista de parametros 
+
+un puntero a una funciones es simplemente aun puntero cuyo valor es la direccion del nombre de la funcion. 
+
+---------------------------------------------------------------
+10.11.1 incialiacion de un puntero a una funcion PG 361 PDF 
+
+la funcion asignada debe tener el mismo tipo de retorno y lista de parametros que el puntero a funcion, en caso contrario se producira un error de compilacion. como ejemplo 
+
+double calcual (int *v, unsingned n); //prototipo de funcion 
+
+double (*qf) (int *, unsigned) ; //puntero a funcion 
+
+int r[11] = {3,5,6,7,1,7,3,34,5,11,44};
+
+double x;
+
+qf = calculo //signa direccion de la funcion 
+
+x=qf(r,11); //llamada a la funcion con el puntero a funcion 
+
+--------------------------------------------------------
+
+ejemplo 10.6 orndenamineto PG 362 PDF 
+
+-----------------------------------------------------
+
+pg 363 PDF 
+
+esta utilidad se ve mucho mas si se imganian un programa grande. al principio del cual se desea elegir una entre arias funciones de modo que la funcion elegida se llamaentonces muchas veces. mediante un punter la elecccion solo se hace una vez despues de asignar la direccion de memoria de la funcion seleccionada a un puntero. 
+
+los punteros a funciones tambein permiten pasar una funcion como argumento a otra funcion para pasar el nombre de una funcion como arguemneto se especifica el nombre de la funcion como arguemento. veamos un ejemplo 
+
+void sufunc(int (*f)());
+
+int mifunc(int i);
+
+void main(){
+
+    sufunc(mifuc)
+}
+
+int mifuc(int i){
+    return 5*i;
+}
+
+----------------------------------------
+
+ejemplo de funcion pasado como parametro al parecer como recursiva . 
+
+PG 364 PDF 
+
+
+---------------------------------------------------
+
+
+10.11.2 aplicacion de punteros a funciones para ordenacion PG 365 
+
+
+
+
+
