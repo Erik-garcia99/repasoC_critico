@@ -429,6 +429,55 @@ PG 364 PDF
 
 10.11.2 aplicacion de punteros a funciones para ordenacion PG 365 
 
+//ejercicio en C 
+
+----------------------------------------------------
+
+10.11.4 
+
+programas que usan multiples funciones puede ser opcional hacer uso de estas funciones mediante switch-case, pero de igual forma se puede usar un arreglo de funciones, pero creo que el arreglo optimiza mucho mas el codigo porque guarda la referencia, a diferentcia del witch-case 
+
+
+una sintaxis para eso puede ser: 
+
+<tipo_retorno>(*punteroFuc[logArray])(<lista de parametros>)
+
+
+cual es al desventaja de esto (a lo que veo en la lectura, falta preguntarle a don internet y su mijo chatgipitiii), que todas la funciones que se manden a lalamr por medio de este tipo de llamado deben de tener los mismos parametros. (creo que hay en C en el cua puedes sobrecarar funciones, como ej java, funciones con mismo nombre pero diferentes numero de parametros, seria preguntarle al chatgpt)
+
+
+----------------------------------------------------------------------
+
+
+10.12 puntero a estrucutras 
+
+se puede declarar un puntero de estrucuta como cualquier otro puntero, (recordando que una estrucutrua es como un tipo de dato creado por el usuario este guarda varios tipos de variables)
+
+podremos ver el sigueinte ejemplo. 
+
+
+struct persona{
+
+    char nomber[30];
+    int edad;
+    int altura;
+    int peso;
+
+};
+
+struct persona empleado = {'amigo, pepe',47, 182, 85}
+
+struct persona *p; //creando puntero de estrucutra, muy escencial en estrucutra de datos en C 
+
+p = &empleado;
+
+cunado se quiere hacer refencia aun miembro de la estruuctra se hace, nombre del identificador de la estrucutra seprado por (.)
+
+como <<empleado.nombre = 'x'; 
+
+pero cunado se hace por medio de puntero se utiliza el operador (->), seria en este caso (p->edad = 50);
+
+
 
 
 

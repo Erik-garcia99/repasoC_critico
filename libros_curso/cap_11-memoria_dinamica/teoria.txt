@@ -1,0 +1,225 @@
+-PG 373 capitulo 11. 
+
+
+
+los progrmas pueden crear variables de manera local o global, las varibales globales se declrarar de manera estatica en la zona conocida como <<segmento de datos del programa>>. 
+
+las varibales locales se almancan en la <<pila (stack)>> esas solo existen en el timpo de vida de la funcion en la que se estan ocupando. 
+
+las vairbales, static, volatile, el compilador reserva espacio en memoria para alamcenar los valores de los tipo de datos declarados. 
+
+sin embargo no simepre es posible conocer con antelacion a la ejecucion cuanta meoria se debe reservar el programa. en C se puede asignar memoria dinamica medinate las funciones <<malloc(), realloc(), calloc() y free()>> (importante el FREE porque C no librea memoria se debe de hacer manualmente.)
+
+
+
+-------------------------------------------------------------------------
+
+
+11.1 GESTION DINAMICA DE LA MEMORIA. 
+
+la memoria estatica, como declarar arreglos de tamanio fijo en ciertas ocaciones puede ser eficiente o en muchas ocaciones puede ser incoventiente, esto porque?, porque si es una varibale que tiende a cambiar de valor o sabemos de ante mano que no siempre sera ese tamanio, se tendira de recompilar cada vez que se quiera cmabiar el espacio en memoria, ya que si cambiando el espacio en memoria del arreglo durando la ejecucion esto no le gusta al compilador. 
+
+si se cambia el valor de un arreglo por ejemplo tdod el valor que habia antes se van a borrar, para esolucionar estos inconvenientes se hace uso de la <<asignacion de memoria dinamica>> el espacio de la varibale se declara dinamicamente, se crea durante la ejecucion del programa, la estatica le asigna espacio de memoria y tamanio durante la compilacion, 
+
+aveces los arreglos estaticos no sabemos si va a ocupar el espacio declarado, si no se ocupa es espacio de memoria desperdiciado, la dinamica se crea exactamente con el tamanio que se requiere y se puede redimencionar 
+
+La memoria que queda se denomina memoria del montículo o almacén libre. Cuando 
+el programa solicita memoria para una variable dinámica, se asigna el espacio de memoria deseado 
+desde el montículo. 
+
+-----------------------------------------------------------------------
+
+11.1.1 alamcen libre (freestore)
+
+ilustracion en la pagina 375.
+
+Para grandes modelos de datos, el almacén libre (heap) se refiere al área de memoria que existe dentro de la pila del programa. Y el almacén libre es, esencialmente, toda la memoria que queda libre después de que se carga el programa
+
+
+las funciones <<malloc()>>, <<realloc()>>, <<calloc()>> y <<free()>>, asignan y liberean memoria de un bloque de memoria denomincado <<monticulo del sistema>>, 
+
+
+-------------------------------------------------------------------------
+
+11.2 FUNCION <<malloc()>>
+
+
+la funcion asigna un bloque de memoria que es el numero de bytes pasados como argumento. malloc() devueve un puntero que es la direccion del bloque asignaado de memoria. 
+
+la froma de llamar a la funcion <<malloc()>> es:
+
+puntero = malloc(tamanio_bytes);
+
+generalmente se hara un casteo de tipo puntero 
+
+tipo *puntero;
+
+puntero = (tipo *)malloc(tamanio_bytes); <- generlamente dado por <<sizeof()>>
+
+
+por ejemplo:
+
+long *p;
+
+p = (long *)malloc(32);
+
+el operador <<sizeof>> devuelve el numero de bytes que ocupa x varibale o un tipo de dato. 
+
+int *r;
+
+r = (int *)malloc(10 *sizeof(int)); //reserva 10 espacios exactos para enteros. 
+
+al llamar a la funcion <<malloc()>> puede ocurrir un error y si esto pasa devuelve NULL. 
+
+
+-> sintaxis de llamada a malloc(). 
+
+tipo *puntero; 
+
+puntero = (tipo *)malloc(tamanio);
+
+la funcion devuelve la direccion de la varibale asignada dinamicamnete, el tpo que devuelve es void*
+
+PRECAUCION! 
+
+el almacenamiento libre no es una funete inagotable de memoria, este esta limitado tanto por la memoria de la propia PC, enonces es responsabilidad del programador verificar que se enceuntre memoria, si no hay memoria para asignar <<malloc>> regresa <<NULL>> la forma mas simple es una conducion como en el siguiente ejemplo. 
+
+
+#define TOPE 1999
+double *ptr_lista;
+
+int i; 
+
+prt_lista = (double *)malloc(1000*sizeof(double));
+
+if(ptr_lista ==NULL){
+
+    puts("error al asignar memoria");
+    return -1;
+
+}
+
+//si se asignao memoria
+for(i = 0; i <1000 ; i++){
+    ptr_lista[i] = (double)*random(TOPE);
+}
+
+
+------------------------------------------------------------------------
+
+
+11.2.1 ASIGNACION DE MEMORIA DE UN TAMANIO DECONOCIDO. 
+
+se puede invocar la funcion de <<malloc()>> para obtener memoria para un array. si no se conce de cunatos elementos este va a hacer, lo que se debe de hacer es pasar como argumento a malloc el numero de elementos que se van a solcitar, puede ser por el usuaio quiera x elementos, por algun algoritmo que reauqiera arreglos de dieferentes tamanios x, este se multiplica por el tamanio del tipo de dato del arreglo para darnos los eleentos solicitados. veamos el ejemplo: 
+
+double *ad;
+int n;
+printf("Numero de elementos del array:");
+scanf("%d", &n);
+ad = (double *)malloc(n*sizeof(doule));
+
+------------------------------------------------------------------------------
+
+11.2.2 uso de <<malloc()>> para arreglos multidimencionales
+
+un arreglo unidemencional es un puntero constante y una matriz sera un puntero a puntero constante (tipo **), recordando que una matriz es un arreglo de arreglos, por lo que para declarar una matriz se indica cada dimsnesion del arreglo de igual forma que se declara un arreglo unidimensional, veamos el ejemplo. 
+
+--ejemplo 11.3
+
+---------------------------------------------------------------------------
+
+11.3 liberacion de memoria <<free()>> 
+
+en C la liberacion de memoria se debe de hacer de forma manual, esto se hace medinate la funcion free(), si no se hace esto la memoria que se asigno por memoria dinamica estara reservada aunque esta no se este usando 
+
+-> sintaxis de llamada a free()
+
+tipo *puntero 
+
+free(puntero);
+
+- la manera es el nombre de la varibale que se quiere librerar va dentro de la funcion 
+
+-----------------------------------------------------------------------------
+
+11.4 funciones de asignacion de memoria <<calloc()>> y <<realloc()>> 
+
+estas funciones cambian la froma de transmitir el numero de bytes de memoria requeridos, ambas devuelven un puntero al bloque asignado de memoria, 
+
+
+---------------------------------------------------------------------------
+
+11.4.1 funcion <<calloc()>>
+
+la froma de llamar a la funcion es: 
+
+puntero = calloc(numero_elementos, tamanio_cada_elemento);
+
+generamente se hara un castin al tipo puntero:
+
+tipo *puntero
+puntero = (tipo *)calloc(numero_elemtnos, tamanio_cada_elemento.);
+
+el tamanio de cada elementos se expresa en bytes, comunmente se utuliza el operador <<sizeof>>, por ejemplo se requiere reservar memoria de 5 datos de tipo double> 
+
+#define N 5
+
+double *pd;
+
+pd = (double*)calloc(N, sizeof(double));
+
+en este ejemplo se reserva memoria para una cadena varibale 
+
+char *c, B[121];
+
+puts("introsuce una linea de caracteres"); 
+gets(B);
+
+c = (char*)calloc(strlen(B)+1, sizeof(char));
+strcpy(c,B);
+
+al igual que <<malloc()>> si no puede asingar memoria este va a devolver un NULL. 
+
+
+PG 383 
+ejemplo 
+
+
+
+-----------------------------------------------------------------------
+
+
+11.4.2 funcion <<realloc()>>
+
+esta funcion permite ampliar un boque de memoria reservado anterioremente, la forma de llamar a la funcion realloc() es: 
+
+
+puntero = realloc(puntero_bloque, tamanio_total_nuevo-bloque);
+
+generalemnte se hara un casting el tipo del puntero. 
+
+tipo *puntero;
+
+puntero = (tipo *)realloc(puntero_bloque, tamanio_total_nuevo-bloque);
+
+el tamanio del bloque se expresa en bytes, 
+
+vemoa el sigueinte eemplo. 
+
+--PG 384 ejemplo 11.5 
+
+
+---------------------------------------------------------------------
+
+ejemplo 11.6 
+
+
+
+
+
+
+
+
+
+
+
