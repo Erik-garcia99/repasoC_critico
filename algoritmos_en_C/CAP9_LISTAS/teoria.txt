@@ -1,0 +1,162 @@
+
+CAPITULO 9 LISTAS - LISTAS ENLAZADAS PG 285
+
+una lista enlazada es una coleccion de elementos << denominados nodos >> dispuestos uno a continuacion de otro. cada uno de ellos conectados con el sigueite por medio de un << enlace (puntero) >>
+
+las listas enlazadas son estrucuutras muy flexibles y con numerosas aplicaciones en el mundo de la porgramacion. 
+
+
+--------------------------------------------------------------------
+
+9.1 FUNDAMENTOS TEORICOS DE LAS LISTAS ENLAZADAS 
+
+los arreglos han sido utilizados para impelemntar estrucutras lineales de elemmentos homogeneos << mismo tipo de valor >>. esta tecnica obliga a fijar por adelantado el espacio a ocupar en memoria de modo que cunado se desea aniadiir un nuevo elemento que reabse el tamanio prefijado del arreglo no es posible. esto es por que los arreglos hacen uso ineficiente de la memoria. 
+
+gracias a la sisgnacion dinamica de variables se pueden implemntar listas de modo que la memoria fisica utilizable se corresponda con el numero de elementos de la tabla.
+
+en otras palabras un arreglo estatico se utilicen o no todos los espacios reservados sera memoria que no se puede usar porque estan dedicados para lops elementos del arreglo, y no es tan eficiente en algunas operaciones donde se estan agregando elementos constantemente 
+
+una lista enlazada solo utiliza la memoria que va a necesitar si solo ocupa para 10 elemenso solo seran esos y tiene la ventaja de que si se elmina x elementos esos esapcios en memoria tambien estaran liberados. 
+
+para esto se recurre a los << PUNTEROS >> que hacen un uso mas eficiente de la memoria como ya se han visto con anterioridad. 
+
+una << LISTA ENLAZADA >> es una coleccion o secuencia de elemenso dispuestos uno detras de otro en la que cada elementos se conecta al sigueinte por medio de un << PUNTERO >>. 
+la idea basica consiste en construir una lista cuyos elemenso llamados NODOS se componen de 2 partes, la << PIMRERA PARTE TIENE LA INFORMACION QUE ES UN TIPO DE VALOR Y LA SEGUNDA PARTE ES UN PUTNERO QUE APUNTA AL SIGUEINTE ELEMENOS DE LA LISTA >> 
+
+     ______        ______        ______
+    |_NODO_| ---> |_NODO_| ---> |_NODO_| 
+
+la anterior es una representacion clasica, veamos otro un ppoc mas detallada con esas 2 secciones 
+
+ ______ ______      ______ ______        ______ ______
+|__ELM_|_0x0F_|--> |__ELM_|_0x10_| -->  |__ELM_|_0x20_|
+     0x0E              0x0F                  0x10
+
+el ultimo nodo depende de que tipo de lista es puede apuntar a << NULL >> en caso de una lista enlazada simple en donde el primero apunta al segundo, el segundo al tercero, etc.. en el caso de una lista circular el ultimo nodo apunta al inicio 
+
+una lista doblemente enlazada tiene 2 espacios de apuntadores, el segundo espacio que es para el sigueinte nodo puede ser NULL una doblemente enlazada simplete o al inicio una circular doblemente enlazada. 
+
+--------------------------------------------------------------------
+
+9.2 CLASIFICACION DE LA SLISTAS ENLAZADAS 
+
+las listas se pueden dividir en cuatro categorias. 
+
+-LISTAS SIMPLEMENTE ENLAZADAS: cada nodo contiene un UNICO ENLACE QUE CONECTA ese nodo al sigeuinet nodos. es muy eficiente en recorridos directos 
+
+-LISTAS DOBLEMENTE ENLAZADAS: cada nodo contiene dos enlaces. uno a su nodos predecesor << antes que el >> y el otro a su sucesor << despues de el >>. es muy eficiente en un recorrdo hacia adelante y hacia atras 
+
+-LISTA CIRCULAR SIMPLEMENTE ENLAZADA: esta lista es en la que el ultimo elemento (cola) se enlaza al primer elemento (cabeza) de tal modo que la lista puede ser recorrida de modo circular 
+
+-LISTA CIRCULAR DOBLEMENTE ENLAZADA: en esta el ultimo elemnso se enlaza con el primer elemento y viceversa. en este se puede recorrer de modo cricualr << en anillo >> tanto en direccion directa o inversa
+
+para estos tipos se puede utiliza una estrucutra basado en arreglos o en punteros. 
+
+
+los elementos de la lista tiene la propiedad de que sus elemetnos estan ordenados de forma lineal segun la posicion que ocupan en la misma. las listas tiene un conjunto de operaciones basicas con objetos de tipo LISTA. 
+
+las operacion serian 
+
+-ListaVacia(L) : inicaliza la lista L como lista vacia 
+
+-Esvacia(L)  : operacion que determina si la lista L esta vacia 
+
+-Insertar(L,x,p)  : inserta en la lista L un nodo con el campo dato X delaten del nodos de la direccionp << operacion push >> 
+
+-localizar(L,x)  : operacion que devuelve la posicion/direccion donde esta el campo de informacion X
+
+-Suprimir(L,x)  : elimina de la lista el nodo que contiene el dato x << operacion POP >>
+
+-Anterior(L,p)  :  Operacion que devuelve la posicion/direcccion del nodo anterior a P 
+
+-Primero(L)  :  Operacion que devuelve la posicion/direccion del primer nodo de la lista L 
+
+-Anula(L)  : esta operacion vacia la lista L << borrar >> 
+
+estas operaciones son las que se pueden considerar basicas para manejar listas. en realidad la desicion de que operacion son las basicas depende de las caracterisiticas del problema que se va a resolver. 
+
+
+
+
+----------------------------------------------------------------------
+
+9.4 OPERACIONES EN LISTAS ENLAZADAS 
+
+una lista enlazada requiere realizar la gestion de los elemnos contenidos en ellas. estos controlaes se manisfietan en  forma de la operacion basicas, especificas al definir el tipo asbtracto lista que tendran las sigueinte funciones. 
+
+-declaraion de los tipso nodo y puntero a nodo 
+-inicalizacion o creacion
+-insertar elemenso en una lista 
+-eliminar elemnos de una lista 
+-buscar elementos de una lista (comoprobar la existencia de elementos en una lista)
+-recorrer una lista enlazada
+-compribar si la lista esta vacia 
+
+
+----------------------------------------------------------------
+
+9.4.1 DECLARACION DE UN NODO 
+
+en C lo mas comun es declarar el nuevo tipo de dato correcponde a un nodo mediante una estrucutra que agrupa las 2 parties que necesita.
+
+#######################################
+EJMP 
+
+struct Nodo{
+    int dato;
+    struct Nodo *enlace;
+}
+
+o 
+
+typedef struct Nodo{
+    int dato;
+    struct Nodo *enlace;
+}NODO; 
+
+#####################################
+
+los 2 ejemplo representan lo mismo la unica diferencia es como le gusta trabajr a cada programador el << typedef >> declara un alias que es mas facil de usar en lo largo del codigo, << pero yo me quedo con la version larga porque ya estuve trbaajdno con esto>> 
+
+el tipo de dato puede ser cualquiera, datos primitivos, arreglos o incluso otros datos abstractos << estrucutras >> 
+
+la otra parte es el enlace que necesitamos para apuntar al sigueinte NODO, es importante que sea del mismo tipo al cual vamos a apuntar, esto es basico de apuntadores.
+
+--------------------------------------------------------------------
+
+9.4.2 PUNTERO DE CABECERA Y COLA. 
+
+las listas se acceden a traves de uno o mas puntero a los nodos. el acceso mas freceucnia a una lista enlazada es a traves del primero nodo de la lista que se llama << cabeza >> de una lista. en ocaciones se mantiene tambien un puntero al ultimo nodo de la lista enlazada. el ultimo nodo es la cola de la lista. a este se le llama << PUNTERO DE COLA >> 
+
+por lo general de declara un tipo de dato igual al nodo el cual recibira la direccion de memoria de la cabeza 
+
+<<
+
+struct Nodo *cabeza; 
+
+>> 
+
+el ultimo valor de la lista su espacio de puntero apunta siempre a << NULL >> 
+
+-----------------------------------------------------------------
+
+9.4.3 EL PUNTERO NULO  pg 290
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

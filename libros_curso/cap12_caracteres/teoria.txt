@@ -1,0 +1,224 @@
+--pagina 398 inicia. 
+
+
+-------------------------------------------------------------------------
+
+
+una cadena es un tipo de dato compuesto por un arreglo de caracteres (char), conocio en algunos lenguajes como <<string>>. 
+
+una cadena se termina con el caracter <<nulo '\0'>>. 
+
+la forma de como leer una cadena es muy similar como leemos un arreglo, porque es un arreglo de caracteres, ya que un string, el tipo string no existe en C. 
+
+por ejemplo la cadena: char cad[] = "Lupiana";
+
+es lo mismo a ser : 'L','U','P','I','A','N','A'. 
+
+-> para captrar un string podemos usar <<scanf("%s",cad)>>, pero lo que va a pasar es que va a capturar hasta que encenutre un esapcio en blanco. 
+
+
+----------------------------------------------------------------------
+
+12.1.1 declaracion de varibae cadena 
+
+el tipo <<unsigned char>> se puede usa si es de interes caracteres especiales, si el caracter se condiera con signo el bit de mayor peso representa el <<bit de signo>>
+
+la manera de declarar la cadena es como si iniciaramos un arreglo ya que al final es eso al final de cuenas, hay varias funciones que podemos usa para trabjar con las cadenas. 
+
+-------------------------------------------------------------------------
+
+
+12.1.2 incializacion de varibale de cadena 
+
+------------------------------------------------------------------------
+
+12.2.2 ectrua de cadenas PG 400
+
+
+se puede usar la uncion <<scanf()>>, con el fromato <<%s>> pero este solo leera hasta que encuentre un espacio en blanco dentro de la cadena. 
+
+la funcion <<gets()>> permite leer toda a cadena incluso los pesacios en blanco, esta terminara cunado entre un salto de linea '\n'. 
+
+esta se encuentro en <<stdio.h>>, 
+
+
+'--------------------------------------------------------------------
+
+12.2.1. funcion <<getchar()>> PG 403 
+
+la funcion <<getchar()>> se utiliza para leer caracter. la funcieon devuelve el caracter sigiguiente del fluj de entrada <<stdin>>, en caso de error, este devuelve <<EOF>> 
+
+
+----------------------------------------------------------------------
+12.2.2 funcion putchar() PG 403 
+
+esta funcion sirve para imprimir por l salida estandar <<por lo genal la pantalla>> un caracter, este va de caracter por caracter. 
+
+veamos el sigueinte ejemplo 12.1 (PG 403)
+
+-----------------------------------------------------------------------
+
+12.2.3 funcion puts() PG 404
+
+la salida <<puts()>> escibribe una cadena de caracteres, (como quien dice y como hemos hecho con micros, llara itereativanete a putchar.), 
+
+
+-------------------------------------------------------------------------
+
+
+12.2.4 funciones getch() y getche(). 
+
+ambas fnciones leen un caracter por tecado sin esperar el retorno de carro. 
+
+getch() el caracter leido no se visualiza en antalla, y getche() si hay eco (muestra por pantalla).
+
+estas se eneuntran en la libreria <conio.h>, 
+
+esta pueden ser usadas para poner en "pause" el programa, hasta que se teclee algo, lo que sea, para continuar.
+
+
+-------------------------------------------------------------------------
+
+
+12.3 biblioteca STRING.h PG 406
+
+funciones de <string.h>
+
+###########################################################################
+<<memcpy()>> -> 
+
+void * memcpy(void *s1, const void *s2, size-t n); - remplaza los primeros n bytes de *s1 con los primero n bytes de *s2, devuelve s1
+
+##########################################################################
+
+<<strcat>>
+
+char *strcat(char *destino, const char *fuente);
+aniade la cadena fuente al final de destino, concatean, devuelve la cadena destino.
+
+##########################################################################
+
+<<strchr()>> -> char *strchar(char *s11, int ch);
+
+devuelve un puntero a la priera ocurrencia de ch en s1, devuelve NULL si ch no esta en s1
+
+##########################################################################
+
+<<strcmp()>> -> int strcmp(const char *a1, const char *s2);
+
+
+compara alfabeticamte la cadena s1 a s2 y devuelve 
+
+0 si s1=s2
+<0 si s1 < s2
+>0 si s1>s2
+
+##########################################################################
+
+<<strcmpi()>> -> int strcmpi(const char *s1, const char *s2);
+
+igual que <<strcmp()>> pero sin distingir entre maysculas y minusculas
+
+
+(lo que creo que hace aqui es que devuelve un valor dependeo de sus valores ascii este dice que no distinge maysuculas y minsuculas esto porque en ASCII un 'a' tiene diferente peso a 'A').
+
+##########################################################################
+
+<<strcpy()>> -> char *strcpy(char *destino, const char *fuente);
+
+
+copia la cadena fuente a la caden destno, devuelve la cadena destino. 
+
+##########################################################################
+
+<<strcspn()>> -> size-t strcspn(char *s1, const char *s2)
+
+devuevle la longitud de la subcadena mas larga de s1 que comienza con el caracter S1[0] y no contiene ningun d e los caracteres de la cadena S2. 
+
+##########################################################################
+
+<<strlen()>> -> size-t strlen(const char *s)
+devuelve la longitud de la cadena s. 
+
+##########################################################################
+
+<<strncat()>> -> char *strncat(char * s1, const char *s2, size-t n);
+
+aniade los primeros n caracteres de s2 a s1. devuelve s1. si  >= strlen(s2), entonces <<strncat(s1,s2,n) tiene el mismo efecto que <<strcat(s1,s2)>>
+
+##########################################################################
+
+<<strcmp()>> -> int strcmp(const char *s1, const char *ss2, size-t n); 
+
+compara <<s1>> con la subcadena formada por los primeros n caracteres de <<s2>> devuelve un entero negativo, cero o un entero positivo, segun que <<s1>> lexicografiamente sea mejor, igual o mayro que la subcadena <<s2>> si n>= strlen(s2) etnonces strncmp (s1,s2,n) y strcmp(s1,s2) tiene el mismo efecto. 
+
+
+
+##########################################################################
+
+<<strnset()>> -> char *strset(char *s, int ch, size-t n);
+
+copia <<n>> veces el caracter ch en la cadena <<s>> a partir de la posicion incial de <<s (s[0])>>. el maximo de caracter que copia es la longitud de <<s>>
+
+##########################################################################
+
+
+<<strpbrk()>> -> char *strpbrk(const char  *s1, const char *s2);
+
+devuelve la deireccion de la peimrea ocurrencia en <<s1>> de cualquiera de los caracteres de <<s2>> devuelve NULL si ningun de los caracteres de <<s2>> aparece en <<s1>>
+
+##########################################################################
+
+<<strrchr()>> -> char strrchr(const char *s, int c);
+
+Devuelve un puntero a la Última ocurrencia de <<c>> en <<s>>. Devuelve <<NULL>> si <<c>> no está en s. La búsqueda la hace en sentido inverso, desde el final de la cadena al pnmer carácter, hasta que encuentra el carácter <<c>>. 
+
+
+##########################################################################
+
+<<strspn()>> -> size-t strspn(const char *s1, const char *s2);
+
+Devuelve la longitud de la subcadena izquierda (sl[O ] ) . . . ) más larga de sl que contiene únicamente caracteres de la cadena s2. 
+
+
+##########################################################################
+
+<<strstr()>> -> char *strstr(const char *s1, const char *s2);
+
+Busca la cadena s2 en s1 y devuelve un puntero a los caracteres donde se encuentra s2
+
+##########################################################################
+
+
+<<strtok()>> -> char *strtok(char *s1, const char *s2);
+
+la cadena <<s2>>. La llamada inicial a <<strtok( s1, s2 )>> devuelve la dirección del primer token y sitúa NULL al final del token. Después de la llamada inicial, cada llamada sucesiva a <<strtok (NULL, s2 )>> devuelve un puntero al siguiente token encontrado en sl. Estas llamadas cambian la cadena <<sl>>, reemplazando cada separador con el carácter NULL
+
+##########################################################################
+
+
+12.3.1 LA PALABRA RESERVDA <<CONST>> PG 407
+
+La ventaja de esta palabra reservada es que se puede ver  rápidamente la diferencia entre los parámetros de entrada y salida. Por ejemplo, el segundo parámetro fuente de s t rcpy representa el área fuente; se utiliza sólo para copiar caracteres de ella, de modo que este área no se modificará. La palabra reservada const se utiliza para esta tarea. Se considera un parámetro de entrada, ya que la función recibe datos a través de ella. En contraste, el primer parámetro destino de s t rcpy es el área de destino, la cual se sobreescribirá y, por consiguiente, no se debe utilizar const para ello. En este caso, el parámetro correspondiente se denomina parárnetro de salida, ya que los datos se escriben en el área de destino.
+
+
+--------------------------------------------------------------------------
+
+
+12.4 ARRAY Y CADENAS COMO PARAMETROS DE FUNCIONES. 
+
+en los arreglos y cadenas siempre se pasa la direccion del objeto, un puntero al primer elemetno del arreglo. la referencia a los elemenos individuales o lo sigueintes del arreglo se hace por indireccionamineto. veamos eje ejemplo <<PASARRAY.C>>, donde implementoa la funcion <<longitud()>> qe calcula la longitud de la cadena 
+
+PG 407. 
+
+
+--------------------------------------------------------------------------
+
+
+ejercicio 12.3  PG 408
+
+el programa extrar n caracteres de una cadena intrdcida por el usuaio 
+
+La extracción de caracteres se realiza en una función que tiene como primer argumento la subcadena a 
+extraer, como segundo argumento la cadena fuente y el tercero el número de caracteres a extraer. Se 
+utilizan los punteros para pasar arrays a la función. 

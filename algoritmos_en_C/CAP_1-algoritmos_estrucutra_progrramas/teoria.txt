@@ -1,0 +1,57 @@
+
+1.1.2 Tipos de datos compuestos y agregados 
+
+los <<datos compuestos>> son el tipo de dato <<atomico:  tipos de dato atomico, se defienne por un conjunto de valores y un conjunto de operaciones que actuan sbre esos valores>> 
+
+los <<datos compuestos>> se pueden romper en subcampos que tenan significado. un ejemplo sencillo puede ser un numero celular. 
+
+los <<tipos agregados>> son tipos de datos cuto valores son colecciones. se compone de tipos de datos previamnete definidos. existen 3 tipos agregados basicos. <<array, secuencias y registros>>
+
+un <<array>> es normalmente una coleccion de datos de tamanio o longitud fija. cada uno de cuyos datos es accesible en tiempo de ejecucacion mediante la evaluacion de las expresiones que represnean subndices o indices correspondientes. 
+
+
+
+un <<registro>> pude contener elementos de <<datos agregado y primitivos>> un registro se puede considerar como un tipo o coleccion de datos de tamanio fijo. a diferencia de los arrays en loq ue todos sus elementos debe der de mismo tipo los cambos de los registos pueden ser de diferentes datos.
+
+el registro es el tipo de dato mas proximo a la diea de objeto. 
+
+<<
+
+registro {
+
+    dato_1,
+    dato_2,
+    dato_3
+}
+
+
+
+--------------------------------------------------------------------------
+
+1.3 abstraccion y tipo de asbtractos de datos PG 30.
+
+TAD - tipo de datos asbstracto - solo muestra la infromacion relevante o la que el usuario necesita conocer. 
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

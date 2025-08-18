@@ -1,0 +1,366 @@
+parte ll
+
+-> disenio de algoritmos recursividad, ordenacion y busqueda
+
+PG 138 
+
+-------------------------------------------------------------------------
+
+5.1 NATURALEZA DE LA RECURSIVIDAD 
+
+la recursividad se puede redicir a una funcion que se llama a si misma bien directamente o bien a traves de otra funcion. la recursividad es un tipico importante examinando frecuentemente en curso y seminarios de resolucion de algoritmos y de estrucutrua de datos. 
+
+
+-----------------------------------------------------------------------
+
+ejemplo 5.1 PG 139
+
+un ejemplo muy comun es el factorial, en donde el faorual es la multiplicacion sucesiva de enfreste a atras 
+
+n! = n * (n-1) * (n-2),...,1 
+
+de modo que una defincion recursiva del metodo factorial n es: 
+
+n! = n * (n-1)!
+
+se puede solucionar este mismo progrma de igual froma como un algoritmo iterativo. el cual podria seminarios
+
+factorial =1; 
+
+for(contador = n;  contador >= 1; contador --){
+    factorial *= contador; 
+}
+
+pero utilizando un algoritmo recursvo debemos tener varias aspectos en cuenta 
+
+- debemos de tener en cuenta la opcion en donde la funcion no se llama a si misma, en decir debemos te tener la condicion en donde el algoritmo se puede solucionar sin la recurcbidad porque debe de haber una parada. 
+
+en el caso del factorial seria cunado el numero es 1, porque 1 x 0 = 0, entonces la funcion se llamara  si misma hta que <<n = 1>>
+
+el algoritmo que resulve n! de modo recursivo se apoya en la defincion sigueinte: 
+
+n! = 1            si n = 0
+
+n! = n * (n -1)!  si n > 0
+
+por lo que el algrimtos que calcula el factorial sera: 
+
+long factorial(int n)
+{
+    if(n == 0){
+        return 1;
+    }
+    else{
+        return n*factorial(n-1);
+    }
+}
+--------------------------------------------------------------------------
+
+
+ejemplo 5.3 serie fibonacci PG 141
+
+esta serie comeinze con los terminos 0 y 1, y se observa que cada elemento a apartir del tercer es la suma de los dos elementos anteriores 
+
+0 + 1 = 1
+
+1 + 1 = 2
+
+2 + 1 = 3
+
+3 + 2 = 5
+
+5 + 3 = 8
+
+...
+
+la funcion recurvia seria: 
+
+long fibonacci(int n)
+{
+    if( n == 0) || (n == 1)
+    {
+        return n;
+    }
+    else
+    {
+        return fibonacci(n -2) + fibonacci(n -1);
+    }
+}
+
+----------------------------------------------------------------------------------
+
+
+
+5.2 FUNCIONES RECURCIVAS PG 142 
+
+un requsiito para que un algoritmo recursivo sea correcto es que no gener una secuencia infinita de llamadas sobre si mismo. la definicion recursiva debe incluir n componente base (condicion de salida), en el que <<f(n)>> se defina direcamente para uno o mas valores de n. 
+
+debe de existir una <<forma de salir>> de la secuencia de llamdas recurvivas. 
+
+
+-----------------------------------------------------------------------
+
+problema 5.1 PG 143 
+
+realizar un programa que escriba los n primreos terminos de la sei de fibonacci siendo <<n>> un nmero requerido al usuario. 
+
+-> programa se la serie fibonacci
+
+
+-----------------------------------------------------------------------
+
+5.2.1 recursividad indirecta: funciones mutaemnte recursivas PG 143 
+
+la recursividad indirecta se produce cunado una funcion llama a otra que eventualmente terminara llamando de nuevo a la primera funcion, 
+
+vemaos un ejemlo con el programa alfabeto 
+
+-> ejemplo .c
+
+el programa llama a la <<funcionA()>> con arugmento 'Z', la funcion examina su arametros <<c>>, si <<c>> esta en orden alfabetico despues de 'A' , llama a <<funcionB()>> que asu vez inmediatamnete invoca a <<funcionA()>> pasandole un parametro prodecesor de c <<esto porque antes de pasar C primero de decrementa y despues lo pasa como parametro>> 
+
+-------------------------------------------------------------------------
+
+5.2.2 condicion de treminacion de la recursion 
+
+cunado se implementa una funcon recursiva sera preciso considerear una condcion de terminacion ya que que en caso contrario la funcion continuaria indefinidamente llamandose a si mima y llegaria un momento en que la mmoria se agotaria. 
+
+en cualquier funcion recursiva es necesario estabalcer una <<condicion de parada>> lo que evita que las funcion se llamanre indefinidamente. 
+
+
+-------------------------------------------------------------------------
+
+5.3 REURSION VS ITERACION  PG 145 
+
+cuanto tomar a decision de solunar por iteracion y cunado por recursion? 
+
+tanto la iteracion como la recursion se basan en una estructrua de controla: << la iteracion utiliza una estrucuura repetitiva>> y la recursion <<utliza una estrucutura de seleccion>>, la iteracion y la recursion implican ambas un test de terminacion. a iteracion termina cunado la condicion de bucle no se cumple mientras que la recursion termina cunado se conoce un caso base. 
+
+un engoque recrusivo se elige nromalmente con preferencia a un enfoque iterativo cunado el enfoque ecursivo es mas natral para la resolucion del problema y produce un programa mas facil de comprender y depurar. 
+
+consejo: 
+<<
+se ha de evitar recursividad en situaciones de rendimineto critico o exigencia de altas prestaciones en tiempo y memoria, ya que las llamadas recursias emplean tiempo y consumen memoria adicional.
+>>
+
+ejemplo 5.5 PG 146 
+suma de sus digitos de un numero n 
+
+la suma de sus digitos se pude expresar con las sigueinte fromulas 
+
+suma = suma(n / 10) + modulo(n,10)  para n> 9
+suma = n                            para n <= 9 - caso base 
+
+solucion recursiva:
+
+int sumaRecursiva(int n)
+{
+    if ( <= 9){
+        return n;
+    }
+    else{
+        return sumaRecursiva(n/10) + n%10;
+    }
+}
+
+
+solucion itrativa:
+
+para la solucion iterativa el bucle se ejecuta mientras la acumulacion del resto de divici n / 10 y actualizar n en el cociente, la condiciond e salida del bucle es que n sea mejor o igual a 9 
+
+int sumaIterativa(n)
+{
+    int suma = 0; //acumuador
+
+    while(n > 9){
+        suma = suma + n%10;
+        n /=10;
+    }
+
+    return(suma + n);
+}
+
+
+
+-----------------------------------------------------------------------------
+
+5.3.1 directuces en la tima de decision iteracion/recursion PG 147
+
+1- considerea una solucion recursiva soo cunado la solucion iterativa sencilla no sea posible. 
+
+2- utilice la recursion solo cunado la ejeucion y eficiencia de la memoria de la solucion este dentre de los limites aceptables considerando las limitaciones del sistema.
+
+3-en ciertos probelmas la recursion condice naturalmente a soluciones que son ucho mas fiables de leer y comprender que su correspondiente iteratia. en estos casos los beneficion obtenidos con la claridad de la suciones suelen compensar el coste exta 
+
+
+----------------------------------------------------------------------
+
+problema 5.2 PG 148 
+
+obtener el mayor comun denominador 
+
+probelma, deducir cual es la condcion de salida del metodo <<mcd()>> que calcula el mayor comun denoinador de dos numeros enteros <<b1 y b2>> el cual es el entero mayor que divide a ambos numeros. 
+
+el algortmos que calcula el <<mcd>> entero dos numero << m y n >> es:
+
+<<
+- mcd(m,n)  es n si n <= m y n divide a mas
+
+-mcd(m,n)   es mcd(n,m) si m < n
+
+-mcd(m,n)   es mcd(n, resto de  divido por n) en caso contrario
+>>
+
+estos pasos significas que: el MCD es n si n es el numero mas pequenio y n divide a m si m es el numero mas pequeno, entonces la determinacion del MCD se debe ejecutar con los argumentos transpuestos por utlimo si n no divide a m, el resto se obtiene encontrando el mcd de n y el resto de m dividio por n
+
+-----------------------------------------------------------------------
+
+5.5 algoritmos << DIVIDE Y VENCERAS >> 
+
+el disenio de algrotmos basados en esta tecnica consiste en transformar (dividir) un problema de tamanio n en problemas mas pequenios de tamanio menor de n pero similares al probrema original. de manera que que resolviendo los subprobelmas y combinanos las soluciones se puedan solucioar el proeblma mayor (venceras).
+
+ejemplos clasimos de la rescursividad, torres de hanoi y metodos de busqueda binaria, ordenacion rapida, ordenacion por mezclas, etc. 
+
+-----------------------------------------------------------------------
+
+5.5.1 torres de hanoi PG 149 
+
+el problema en cunestiosn suponia la existencia de 3 varibllas o postes << A, B y C >>, en los que se alojaba dicos (n discos) que se podian transladar de una varilla a otra libremente peor co una condicion, 
+
+<< cada disco era ligeramente inferior en diametro a que estaba justo debajo de el>>
+
+<< podemos ver con ilustraciones en la PG 150 >> 
+
+si se desea tranlar a la varilla C conservando la condicion de que cada disco sea ligeramente inferior en diametro al que tiene situado de bajo de el. un primer movimeinto puede ser cambiar cinco discos de golpe de la varilla A a la varilla <<B>>, luego el disco mas grande que esta en << A >> a la varilla << C >>. 
+
+ahora el problema se centra en pasar los cinco discos de la varilla << B >> a la varilla << C >>, y se hace un metodo similar, en pasar los cuatro discos de mayor tamanio de la varilla << B >> a la varilla << A >> y a continuacion se pasa el dco de mayor tamanio de la varilla << B >> a la varilla << C >>, y asi sucesivamente el preoceso contna de modo recursivo ahasyq eu finalente se queda un sico en la varilla << B >> que es el caso base a su vez la conducion de parada. 
+
+
+- DISENIO DEL ALGORITMOS 
+
+el ejemplo anterior de seis discos se puede generalizar a un algoritmo recursivo con << n >> discos y tres varillas. 
+
+la funcion << hanoi() >> decara las varillas o postes como datos de tipo char en la lista de parametros, el orde seria: 
+
+<<
+    varinicial      varcentral      varfinal
+>>
+
+de manera que se mueve discos desde la varilla incial a la final utilizando la varilla central como auxiliar para almacenar los discos si n = 1 se tiene la condicion de parada. el caso base de puede resolver directamente moviendo el unico disco desde la varilla incial a la varilla final 
+
+el algoritmos seria 
+
+1 - si n es 1
+    1.1 mover el disco 1 de varinicial a varfinal 
+
+2 si no
+    1.2 mover n-1 discos desde varinical hasta varcentral utiliazando varfinal como aux 
+
+    1.3 mover el disco n desde varlla incial varinical a varfinal 
+    1.4 mover n -1 discos desde la var auxiliar varcentral a varfinal utilizando como aux varinical 
+
+
+
+la primera etapa en el algoritmo mueve n-1 discos desde la varilla inical a la varilla central utilizado la varilla final como almacenamineto temporal. el orden de parametros en la llama a la fucion recursiva es << varinical, varfinal y varcentral >>. 
+
+
+//utiliznar var final como alamcenamineto aux 
+
+void hanoi(varinical, varfinal, varcentral, n-1);
+
+
+condicion 
+
+void hanoi(varinical, varfinal, varcentral, n-1){
+
+    if(n = 1){
+        printf("mover disco %d desde varilla %c a varilla %c \n:", n, varinical, varfinal);
+    }
+    else{
+        hanoi(varinicial, varcentral, varfinal, n-1);
+        printf("mover disco %d desde varilla %c a varilla %c \n:", n, varinical, varfinal);
+        hanoi(varcentral, varfinal, varinical, n-1);
+    }
+}
+
+-----------------------------------------------------------------------
+
+
+5.5.2 BUQEUDA BINARIO RECURSIVA PG 154 << REALIZAR EL AGORITMO  >> 
+
+la busqueda binaria es una metodo de localizacion de una clave especifica dentro de una lista o arreglo << ORDENADO, la buqueda binaria funciona si el arreglo esta ordenado >> de n elemntos que realiza una exploracion de la lista hasta que se enceuntra o se decide que no se enceuntra en la lista. 
+
+el algoritmode busqueda binaria se puede describir recrsivamente aplicando la tecnica de divide y venceras. 
+
+se tiene aun lista odenada << a[] >> con un limite inferior y un limite superior. dada una clave (valor buscado), se comienza la busqueda en a posicion central de la lista. 
+
+<<
+centra = (inferior + superior)/2   ->  comparar a[central1] y clave
+>>
+
+si se produce coincidencia se tiene la condicion de la terminacion que permite detener la buqueda y devolver el indice central. se centra la busquda en la sublista <<subisa inferior - a la izquierda de la osicion centrla>> o en la << sublista derecha - a la derecha de la pisicion central>> 
+
+- la busqueda lo que hace es dividir el arreglo a la mitad y comprara el elemento del indice que esta a la mitad de ese, es mayor al buscar buscaremos en su indice derecho, y aplicamos lo mismo, pero si es menor buscamos en el idnice izquierdo. en el caso que vaya de menor a mayor. 
+
+--------------------------------------------------------------------
+
+5.7 backtracking, algoritmo de vuelta atras PG 158
+
+la resolucion de algunos probelmas exige probar sistematicamente todas las posibilidades que pueden existir para encontrar la solucion. 
+
+los << algoritmos de vuelta atras >> utilizan la recurividad para probar cada unas de las pisibilidades de encontrar la solucion. 
+
+estos algoritmos descomponen el proceso de busqueda o tanteo de una solucion en tareas parciales. cada tarea parcial realiza las mismas acciones que la tarea anterior y por eso se expresa frecuencetemente en forma recursiva. 
+
+el proceso general de los algoritmos de << backtracking >> se completa como un metodo de prueba o busuqeda que gradualemnte construye tareas basicas y las inspecciona para determinar si conducen a la solucion del problema. 
+es una prubea sistematica hasta llegar a la solucion o bien determinaar que no hay solucion por haberse agostado todas las opciones que probar. 
+
+esque genral de estos algoritmos 
+
+SUBPROGRAMA ensayarSolucion
+
+INICIO
+    < inicalizar cuenta de posibles selecciones >
+    REPETIR 
+        < tomar sigueinte seleccion (tarea) >
+        < determinar si seleccion es valida >
+        SI valido ENTONCES 
+            <anotar seleccion >
+            SI < problema solucioad > ENTONCES
+                exito = true
+            SI NO 
+                ensayarSolucion (llamara para relaizar otra tarea)(vuelta atras, se analiza si se ha alcanzado la solucion del problema)
+            SI NO exito ENTONCES
+                <borrar anotacion> (el buvle se encarga con ptra seleccion)
+            FIN_SI
+        FIN_SI
+    FIN_SI
+hasta(exito) o ( <no mas posibilidades> )
+fin
+
+
+----------------------------------------------------------------------
+
+5.7 probelma del salto del caballo PG 159 
+
+el tablero de ajedez es de n x n casillas, se tiene un caballo situado en la posicion inical de coordenadas ( x_0, y_0). 
+
+el problema consiste en encontrar si existe un circuito que permite al caballo pasar exactamente una vez por cada una de las casillas de tablero, teneindo en ceunta los movimeintos(saltos) permitidos a un caballo en el juego de ajedrez 
+
+el problema consiste en buscar la secuecina de saltos ha de dar el caballo partiendo de una casilla cualquiera, para pasar por cada una de las casillas del tablero. 
+
+< veamos el inicio que esta en ejemplo > 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -213,13 +213,100 @@ vemoa el sigueinte eemplo.
 
 ejemplo 11.6 
 
+----------------------------------------------------------------------
 
 
+11.5 asignacion de memoria para arreglos (PG 386)
+
+la gestion de listas y tablas mediante arreglos es una de las operaciones mas usuales en cualquier programa. la asignacion de memoria para arreglos es, en concecucnia una de las tarreas que es preciso conocer en profundiad. 
+
+en el sigueinte ejemplo poderemos ver como se asigna memoria utilizando la funcion <<malloc()>> para asignar memoria a un arreglo. 
+
+--------------------------------------------------------------------
+
+ejemplo 11.7 PG 386
+
+--------------------------------------------------------------------
+
+11.5.1 asignacion de modira interactivamente 
+
+veamos el sigueinte ejercio (og 387) en donde muestra como invocar <<calloc()>> para asignar memoria para un arreglo. cuando se ejecutan se pide al usuario el tamanio del arreglo. y si se contesta adecuadamente el programa genera un array de números enteros aleatorios.   A su vez, genera otro array 
+con los mismos valores pero sin duplicidades; este segundo array se crea dinámicamente con la función 
+realloc ( ) . La estrategia para reservar memoria es llamar a redlloc ( ) para expandir el array cada 10 
+valores; es decir, primero se asigna memoria para 10 valores y cuando se ha completado se asignan 
+otros 10 y así sucesivamente.
 
 
+--------------------------------------------------------------------------
 
 
+11.6 arreglos dinamicos 
+
+un nombre de un arreglo es realemnteo un puntero constante que se asginsa en tiempo de compilacion 
+
+se puede utilizar un puntero no constante para posponer la asignacion de memoria hasta que el programa se este ejecutado  este tipo de enlace se denomica <<<ligadura dinamica o ligadura en tiempo de ejeccion>>
+
+<<float *p = (float*)malloc(30*sizeof(float));
+
+un array que se declara de este modo se denomica array dinamico. 
+
+un array dinamicoa se crea en tiempo de ejecucion, su memoria solo se asigna soo cunado se ejecuta la declaracion. entonces la vribale arreglo <p> durara hasta que se encuentre la funcion <<free()>>
+
+---------------------------------------------------------------------
+
+11.7 reglas de funcionamineto de la asignacion de memoria. 
+
+1- las funciones de asignamineto de memoria estan en <stdlib.h>
+
+2 - las funciones <<malloc(), realloc(), calloc()>> devuelen el tipo void* lo cual exige hacer una conversion al tipo del puntero. 
+
+double *vec;
+int n; 
+
+vec =(double*)calloc(n, sizeof(double));
+
+5 - la funcion <<realloc()>> permite expandir memoria reservda. 
+
+int *v = NULL;
+int n;
+scanf("%d", &n);
+v =(int *)realloc(v,n);
+v = (int*)realloc(v , 2*n);
 
 
+6- las funciones de asignacion d emoeria devuvlen NULL si no han posido reservar la meroia requerida. 
 
+7- se puede utilizar cualquier funcion de asignacion de memoria ara reservar espacio de objetos mas completos, tales como estructrua, array,en el almacenamineto libre. 
+
+8 - Se pueden crear arrays multidimensionales de objetos con las funciones de asignación de 
+memoria. Para un array bidimensional n x m, se asigna en primer lugar memoria para un array de 
+punteros (de IZ elementos), y después se asigna memoria para cada fila (m elementos) con un 
+bucle desde O a n- 1. 
+
+#include <stdlib.h> 
+double **mat; 
+int n,m,i; 
+mat = (double**)malloc(n*sizeof(double*));/* array de punteros */ 
+for (i=O; i<n; i++) { 
+    mat[il=(double*)malloc(m*sizeof(double));/*fila de m elementos
+}
+
+
+--------------------------------------------------------------------
+
+11.10 probelmas P 395
+
+11.10.1
+
+Escriba un programa para leer n cadenas de 
+caracteres. Cada cadena tiene una longitud 
+variable y está formada por cualquier carácter. 
+La memoria que ocupa cada cadena se ha de 
+ajustar al tamaño que tiene. Una vez leídas las 
+cadenas se debe de realizar un proceso que 
+consiste en eliminar todos los blancos, siempre 
+manteniendo el espacio ocupado ajustado al 
+número de caracteres. El programa debe 
+mostrar las cadenas leídas y las cadenas 
+transformadas. 
 

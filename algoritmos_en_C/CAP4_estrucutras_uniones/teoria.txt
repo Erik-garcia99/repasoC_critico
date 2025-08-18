@@ -1,0 +1,464 @@
+estrucutras y uniones 4 - PG 106 PDF
+
+
+
+-------------------------------------------------------------------------
+
+4.1 estrucutras  - PG 107 
+
+un arreglo es un tipo de dato que contiene numero determinado de elementos y estos deben de ser del mismo tipo de dato, lo qu es una estrucutra de datos homogenea. 
+
+son muy utilices, pero todo en C tienen su manera de estar, un arreglo para almacnar datos de temperaturas puede ser nuy util todos os tipos seran del mismo tipo, 
+
+pero no puden ser util por ejemplo para registrar datos de una persona-empleado, no seria tan util tener un arreglo de x elemenso para nombre, otro para edad, otro para estatura, etc. para solucionar esto surgen las <<estructuras - struct>> 
+
+los componentes individuales de una estrucutra se llama <<miembros>>, cada miembro puede ser de tipos de datos direntes, como una estrucutra se puede componer de 1 elemntos entero, 1 float, 1 long, incluso hasta arreglo o hasta otra estrucutra. 
+
+veamos un ejemplo por ejemplo de elementos que componene a un CD, una estrucutra puede ser lo mas cercano que podemos encoentrar en C a la deficion de un objeto 
+
+que describe a un CD? 
+
+-titulo
+-artista
+-numero de canciones
+-precio
+-fecha de compra.  
+
+entonces aqui podemos deducir de que tipo serian cada miembro de las estrcuutras 
+
+
+-------------------------------------------------------------------------
+
+
+4.1.1 declaracion de una estrucutra. 
+
+una estrucutra es un tipo de dato defindio por el usuario que se debe de declarar antes de utilizarla. 
+
+<<
+struct <nombre_de_la_estrucutrua>>
+{
+
+    <tipo_de_dato><nombre_del_miemrbo>;
+    <tipo_de_dato><nombre_del_miemrbo>;
+    <tipo_de_dato><nombre_del_miemrbo>;
+    <tipo_de_dato><nombre_del_miemrbo>;
+};
+>>
+
+ejemplos: delcaracion de estrucutra de CD es:
+
+struct coleccion_CD
+{
+
+    char titulo[30];
+    char artista[25];
+    int num_canciones;
+    float precio;
+    char fecha_compra[8];
+};
+
+
+-----------------------------------------------------------------------------
+
+
+4.1.2 defincion de varibales de estrucutras PG 108
+
+al igual que a los tipos de datos enumerados a una estrucutra se accede utilizando una varibale o variables que e deben definir despues de la declaracion de la estrucutura. 
+
+en C existen dos conceptos similares a considerar: <<declaracion y definicion>>. 
+
+-una declaracion especifica simplemente el nmbre y el domato de la estrucutra de datos. pero no reserva almacenamineto en memoria 
+
+-la definciion de varibale para una estrucuta dada crea un area en memoria en donde los datos se alamcenan de acuerdo al fromato declarado. 
+
+las varbales de estrucutra se pude definir de dos formas:
+
+1-listandolas inmediatamente despues de la llave de cierre de la declaracion de la estrucutra 
+
+2-listando el tipo de la estrucutura creado seguida por las varibales correspondinetes en cualquier ugar del prorgrama antes de utilizarlas. 
+
+veamos loe ejemplos 
+
+<<
+1 - 
+struct coleccion_CD
+{
+
+    char titulo[30];
+    char artista[25];
+    int num_canciones;
+    float precio;
+    char fecha_compra[8];
+}cs1, cd2, cd3;
+
+2-
+
+struct coleccion_CD
+{
+
+    char titulo[30];
+    char artista[25];
+    int num_canciones;
+    float precio;
+    char fecha_compra[8];
+};
+
+
+struct coleccion_CD cs1, cd2, cd3;
+
+----------------------------------------------------------------------
+
+4.1.3 uso de estrucutras en asignaciones PG 110
+
+una estrucutra puede tener los mismos valores de otra estrucutras, <<pero solo de su mismo tipo>> 
+
+por ejemplo hagamos que <<libro3,libro4 y libro5>> tengan los mismos valores 
+
+
+libro3 = libro 1;
+libro4 = libro1;
+libro5 = libro1;
+
+---------------------------------------------------------------------------
+
+4.1.4 incilizacion de un decaraion de estrucutra 
+
+
+se puede definir la infromacion de los miembros en la seccion del codigo de su programa o bien parte de la incializcion. para definir los valores incialies en la parte de la definicion se hacem medinate llaves. y cada elemento separados por comas. 
+
+ejemplo: 
+
+<<
+struct infroLibro
+{
+    char titulo[60];
+    char auto[30];
+    char editorial[30];
+    int anio;
+
+}libro1 = {"maravilla del saber ", "lucas garcia", "McGraw-Hill", 2003};
+
+de la misma manera pude ser durante el codigo, <<auqneu aveces no se hace asi todo como 1, pero esto puede depender del prgramador. para mi es mas comodo 1 a 1 meintras se van pidiendo los datos. 
+
+
+
+---------------------------------------------------------------------------
+
+4.2 ACCESO A ESTRUCUTRAS PG 112 
+
+cunado se accede a una estrucutra o bien se alamcena infromacion en la estrucutra o se recupera la infromacion de la estrucutra se puede acceder mediante estas 2 formas 
+
+1- utilizando operador punto (.) <<por valor>>
+2. utilizando el operador puntero (->) <<por referneica>>
+
+
+---------------------------------------------------------------------------
+
+4.2.1 almacenamineto de ifnromadion en estrucutras PG 112
+
+
+acceso a una estrucutra de datos medinate el operador punto. 
+
+este es medinate la sigueinte sintaxis: 
+
+<nombre_varibale_estructrua>.<nombre_miembro> = dato;
+
+ejemplo
+cd1.precio = 3450.75
+de.num_canciones = 7; 
+
+el operador punto proporciona el camnio deirecto al miembro correspondiente. los datos que se alamcenan en un miembro dado dedebn ser del mismo tipo que el tipo declarado para ese miembro.
+
+
+acceso a una estrucutra de datos medinate el operador puntero. 
+
+el operador puntero (->) sirve para acceder a los datos de la estrucutra a partir de un puntero. para utilizar este opreador se debe definir primero una vairbale puntero para apuntar a la estrucutra. este sigue el sigueinte sintaxis 
+
+<puntero_estrucutra> -> <nombre_miebtro>= dato;
+
+se puede definir <<ptrEst>> como un puntero a la estrucutra 
+
+<<
+struct estudiante *ptrEst;
+struct estudiante mejor; 
+
+a los miembtos de la estrucutra estudiante se les puede asignar datos como sigue (siempre y cuando la estrucutra ya tenga creado su espacio de almacenaminet, por ejemplo con malloc());
+
+ptrEst = &mejor; // tiene la direccion de <<mejor>>
+
+strcpy(ptrEst->nombre, "pepe alondra");
+ptrEst->numEstudiante = 3425;
+ptrEst-> nota = 8.5; 
+
+
+---------------------------------------------------------------------------
+
+4.2.2 lectura de infromacion de una estrucutra PG 114 
+
+para imprimir la infromacion del miebro de la estrucutra bien podemos asingar el valor del miebro a una varibale de tipo primitiva o bein podemos imprimria diirectamente utilizando bien <<printf, puts, etc>>
+
+
+-----------------------------------------------------------------------
+
+4.3 estrucutras anidadas PG 115
+
+
+una estrucutra puede contener otras estrucutras llamdas <<estrucutras anidadas>> estas ahorran tiempo en la estrcuutra de programas que utilizan estrucuturas similares. se han de definir los miembos comunen soloa una vez en su propia estrucuta y a continuacion utlizar esa estrucutra como un miembro de otra estrucutra
+
+consideeremos el sigueinte ejemplo 
+
+<<
+struct infro_dir
+{
+    char direccion[25];
+    char ciudad[20];
+    char provincia[20];
+    lon int cod_postal;
+};
+>>
+
+esta estrucutrua se puede utilizar como un miembo de las otras estrucutra es decir anidarse
+
+<<
+struct empleado
+{
+    char nombre_emp[30];
+    struct infro_dir direccion_emp;
+    double salario;
+};
+
+struct cliente{
+    char nombre_cliente[30];
+    struct infro_dir direccion_clien;
+    double saldo;
+};
+
+
+--------------------------------------------------------------------------
+
+ejercicio 4.1 PG 118 
+
+
+
+
+--------------------------------------------------------------------------
+
+
+4.4 arreglo de estrcutruas 
+
+se puede crear <<array de estrucuutras>> tal como se crea un array de otros tipos. los arrays de estrucutruas son idoneos para almacenar en memoria un archivo comleto de empleados. 
+
+los arrays de estrucutras permiten almanenar juntos diversos valores de diferenes tipos, agrupados como estrucutras. 
+
+la declaracion de un arreglo de estrucuutras <<infro_libro>> se puede hace n modo similar a cualquier array. 
+
+<<
+struct info_libro libro[100];
+>>
+
+para accedere a cada uno de los elemntos de las estrucutras se sigue usando el metodo de indices, es decir por medio de los indices seleccionamos uno o otra estrcuutras, seran del mismo tipo pero no son el mismo, y para acceder a cada elementos sigue siendo el mismo metdo de <<punto(.)>> o apuntador <<apuntador(->)>>
+
+strcpy(libos[0].titulo, "C a su alcance");
+strcpy(libos[0].autor, "luis jayanes");
+strcpy(libos[0].editoral, "McGraw-Hill");
+libros[0].anio=1999;
+
+
+----------------------------------------------------------------------------
+
+4.4.1 arreglo como miembros PG 120
+
+
+los miembos de las estucutruas puede ser asi mismo arreglos. 
+
+consderemos las sigeinte estrucutras el cual es un arreglo de 100 espacios de la misma estrucutra 
+
+<<
+struct nomina
+{
+    char nombre[30];
+    int dependiente;
+    char departamento[10];
+    float horasdias[7]; //arreglo de tipo float
+    float salario;
+}empleado[100]; //arreglo de 100 empleados
+
+-> vemoa el ejemplo 4.1 inventario de libros PG 121
+
+------------------------------------------------------------------------
+
+4.5 utilizacion de estrucura como parametros 
+
+C permite pasar estrucutras a funciones, bien por valor o po referencia (puntero), utilizando el operdor << & >>, el sigueinte ejemplo mistra la llaada a una funcion para entrada de datos que pasa la direccion de una esrucutura.
+
+PG 122 
+
+
+------------------------------------------------------------------------
+
+4.6 UNIONES 
+
+las uniones son similares a las estrcuutras en cunato que agrupan a una seri de varibales, 
+
+las estrucutas permiten almacenar varibales relacionadas juntas y almacencas en posicion contiuas en memoria. 
+
+las uniones almacenan tambein miembros multiples en un un paquete, sin embargo en lugar de situar sus miembros unos detras de otros en una union todos los miembos se solapan entre si en la misma posicion el tamanio mayor de varibale es el que deribara el tamanio de la union. 
+
+la declaracion seria: 
+
+union nombre{
+    tipo1 miembo1;
+    tipo2 miembro2;
+};
+
+
+la razon para utilizar una union es ahorrar memoria en umuchos progrsmas se deben tener varibales varibales, pero no necestian utilizarse todas al mismo tiempo. 
+
+po ejemplo si tenemos las sigueintes arreglos 
+
+<<
+char linea_ordenes[80];
+char mensaje_erro[80];
+char ayuda[80];
+>> 
+
+estas 3 varibales ocupan 240 bytes de memoria, si su programa no necsita utilizar las 3 vaaribales somultaneamnete. cunado se combinan en el tipo <<union frases>> estas solo coupan un totoal de 80 bytes 
+
+union frases{
+    char linea_ordenes[80];
+    char mensaje_error[80];
+    char ayuda[80];
+}cadenas, *pc;
+
+para refereise a los miembro de una union se utiliza el operador punto (.), o bien el operador (->) se hace desde un puntero a union.
+
+
+las unciones tambein pueden usar como mimbros estrucutras 
+
+------------------------------------------------------------------------
+
+4.7 enumeraciones 
+
+
+una enumeraion(enum) es un tipo definido por el usuario con consantes de nombre de tipo entero. en la declarcion de un tipo <<enum>> se escribe una lista de identificadores que internamnete se asocian con las constanes enteras 0, 1, 2 ... 
+
+formado: 
+
+enum {
+    anumerador, enumerador, ..., enumerador
+};
+
+
+enum nombre 
+{
+    anumerador, enumerador, ..., enumerador
+};
+
+
+lo que hace el enum es remplazar numeros enteros como 0, 1, 2, en alguna exprecion que podemso enterenet de mejor manera que un numero, asi que un enumerador empieza desde el numero 0 
+
+ejempo 
+
+enum interrptor
+{
+    ENSENDIDOS, 
+    APAGADO
+};
+
+digamo que ENCENDIDOS = 0 y APAGADO = 1, entonces que 1 == APAGADO y 0 == ENCENDIDOS. 
+
+
+-------------------------------------------------------------------------
+
+4.7.2 typedef 
+
+un operador typedef permite a un programador crear un sinomio de un tipo de dato definido por el usuario o de un tipo ya existente, usalemnte usado para estrucutras 
+
+
+<<
+typedef tipoDeDato nuevoTipo; 
+>>
+
+apartir de la declaracion hecha con typedef se puede hacer uso del nuevo sonomino del tipo de dato 
+
+ejemplo: 
+
+<<
+typedef double Longitud;
+
+Longitud distancia(Punto p1, Punto p2){
+    Longitud longitud = sqrt(r-cua);
+    return longitud; 
+}
+>>
+
+normalmente los programadores utilizan sonomincos de tipos de daos estrucura para simplificar los tipos y hacerlo mas "amigables". 
+
+ejemplo:
+
+<<
+struct complejo
+{
+    float x,y;
+};
+
+typedef struct complejo complex;
+>>
+
+
+tambien en una sola sentencia se puede declarar e tio etrucutra y asociacion a un nombre con <<typedef>>
+
+
+<<
+typedef struct
+{
+    char apellido[31];
+    char nombre[21];
+    int edad;
+    char pasaporte[26];
+    char sexo;
+}Pasajero;
+
+//prototipo de la funcion de entrada de datos 
+
+Pasajero entrada();
+
+------------------------------------------------------------------------------
+
+4.8 CAMPOS DE BIT PG 130 
+
+en C se permite realizar operaciones con los bits de una palabra mediante un conjunto de operadores de manejor de bits (>> - recorrido a la derecha, << - recorrido a la izquierda)
+
+un campo de bits es un conjunto de bits adyacentes dentro de una palabra. 
+
+la sintaxis para declarar campos de bts se basa en la declaracion de estrucuta, el fromato es el sigueinte 
+
+<<
+struct identifiador_campo
+{
+    tipo nombre1:longitud1;
+    tipo nombre2:longitud2;
+    tipo nombre3:longitud3;
+    .
+    .
+    .
+    tipo nombre:longitud;
+};
+
+donde <<longitud>> es el total de bits que ocupara x miembro, como puede ser una palabra de 8 bits como en UART puede ser el tamanio del contenido la ifnromacion pueden ser de 2 a 3 bits, por lo que reservamos 3 bits para darle formato.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

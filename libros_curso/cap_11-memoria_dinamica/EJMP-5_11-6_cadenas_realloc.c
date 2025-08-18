@@ -44,6 +44,29 @@ int main(){
         char *R =NULL; 
 
         R = realloc(R, (strlen(clave) + 1) * sizeof(char));
+
+        //copiar los strlen(clave) primeros caracteres
+
+        for(j=0; j< strlen(clave); j++){
+
+            *(R+j) = *(C2+j); 
+        }
+        *(R+j) = '\0';
+
+
+        if( strcmp(clave,R) ==0){
+            //AMPLICAR EL BLOQUE DE MEMORIA 
+
+            tam = (strlen(C1) + strlen(C2) +1)*sizeof(char);
+
+            C1= realloc(C1, tam);
+
+            strcat(C1,C2);
+        }
     }
+
+    printf("\nCadena primera: %s", C1);
+    printf("\nCadena segunda: %s", C2);
+    return 1;
 
 }
