@@ -142,6 +142,145 @@ el ultimo valor de la lista su espacio de puntero apunta siempre a << NULL >>
 
 9.4.3 EL PUNTERO NULO  pg 290
 
+es algo muy comun en las estrucutras de datos cunado se escriben en C, la palabra reservada << NULL >>, lo que indica en una lista enlazada simple el ultimo elemento de esta lista no apunte a nada, es muy importnate el tener el control de la lista, porque si esta esta apuntando a algo, va a apuntar a lugares extranios dentro de la memoria lo cual no queremos. 
+
+
+
+-------------------------------------------------------------------
+
+9.4.4 OPERADOR ( -> ) de seleccion de un miembro 
+
+si << p >> es un puntero a una estrucuutra y << m >> es un miembro de la estrucuutra, entonces ( p->m) accede al miembro << m >> de la estrucutrua apuntada por << p >> 
+
+el operador ( -> ) es el operador con el cual de maneja estrucutruas de manera apuntador, por lo que esta fecha apunta a un miembro de la estrucutura << p >> 
+
+
+9.4.5 CONSTRUCCION DE UNA LISTA -- PG 292
+
+una opreacion que se realiza con una lista es asignar un valor inical, este es el de lista vacia. consiste en asignar nulo al puntero de acceso a la lista. 
+
+- Nodo *cabeza
+-cabeza =NULL; 
+
+para aniadir elementos a la lista se utiliza la operacion << insertar () >> 
+
+ejemplo 9.2 
+
+ejemplo de definicion de NODO de la lista 
+
+<<<
+
+struct Elemento{
+    int dato;
+    struct Elemento *sig;
+};
+
+
+int main(void){
+    struct Elemento *lista = NULL;
+}
+
+>>>
+
+en la estrucutrua << ELEMENTO >> hay dos miembros, << dato y sig >> el cual es un puntero al sigueinte nodo de la misma estrucutura. 
+
+depende de libros o de quien trate las listas pueden iniciarlo de 2 maneras, una forma que he visto mas en libros, es depsues declarar un alias para la estrucuutra 
+
+typedef struct Elemento Nodo =  NULL;
+
+en este caso estamos inicando la estrucutra, debe de apuntar a nulo desde un inicio 
+
+o la forma en como lo hago un poco mas de procesos pero asi es como lo he trabajado y como que me da uns vista mas amplia y por seguridad no declarar varibales globales, declaro un puntero en la funcion main en cual siempre apunta a la cabeza de la lista, ya sea cola o pila. 
+
+
+- creacion de un NODO 
+ahora para la creacion de un nuevo nodo es necesario reservar la memoria suficiente o necesaria que se le debe de asignar al nodo, 
+
+-- struct Nodo *aux = tope;
+
+--aux = (struct Nodo*)malloc(sizeof(struct Nodo));
+
+despues de asignarle espacio en memoria ahora asinganermos valores en sus elementos 
+
+aux ->dato = 11;
+aux->sig = NULL; <- en el caso de crear un nodo este va a apuntar a un apuntador nulo. 
+
+si se crea una funcion que crear nodo que recibe tanto el dato a insertar y el elemntos que va a insertar solo s epodra comporar como pila o como cola dependeindo de como lo queramos programar o lo que necesitamso, pero si se crea una funcion que solo crea el nodo mas no conecta, solo seria cosa de programr la funcion para pila o opara cola 
+
+
+<< 
+
+funciones de crear nodo y PUSH (pila) - insertar (cola)
+
+
+struct Nodo *crearNodo(int dato){
+
+    struct Nodo *nuevo;
+    //reserva memoria del tamanio de la estrucuturua 
+    nuevo=(struct Nodo *)malloc(sizeof(struct Nodo));
+
+    nuevo->dato=dato;
+    nuevo->sig=NULL;
+    return nuevo;
+}
+
+//PUSH
+struct Nodo *push(int dato, struct Nodo *tope){
+    struct Nodo *aux = tope; 
+    //siempre debemos de mantener el apuntador al incio, manejamos otro apuntador que se va a mover en memoeria y la referencia al icniio de nuestra estrucutra se mantiene
+
+    //en forma de PILA el nuevo elemnto se inserta al inciio, es una pila LIFO << Last In, Fist Out >>
+    struct Nodo *nuevo = crearNodo(dato);
+    nuevo->sig=aux; 
+    return tope;
+}
+
+//insertar - cola
+
+struct Nodo *insertar(int dato, struct Nodo *cabeza){
+    //en una cola, los elemntos que van entrando se van poneindo en la parte de atras, entonces necesito ir revisando cada nodo, hacemos un recorrido para saber cual es el ultimo elemento de la cola, una cola si es una estrucutra tipo FIFO << First In, Firts Out >>, 
+    por eso utilizo un while para verificar si en el nodo actual si apuntador a << sig >> es diferente a NULL si no, es el utimo y insertamos ahi nuestro nuevo nodos
+
+
+    struct Nodo *aux = cabeza;
+    struct Nodo *nuevo = crearNodo(dato);
+
+    while(aux->sig !=NULL){
+        aux= aux->sig;
+    }
+
+    aux->sig = nuevo;
+    return cabeza;
+}
+
+---------------------------------------------------------------------
+
+EJERCICIO 9.1 PG 296 
+
+se va a formar una lista enlazada de numeros aleatorios, le programa debe de instartar los nuevos nodos por la cabeza (PILA - STACK) , una vez hecho esto recorre la lista para mostrar los numeros pares. 
+
+
+------------------------------------------------------------------
+
+9.5.2 INSERCION DE UN NODO AL FINAL DE LA LISTA << COLA >>
+
+hay varias formas de insertar al ultimo de manera de cola, varios utilizan doble puntero, yo utilizo una varibale auxiliar que me ayuda a recorrer la lista hasta el final, es simple pero no es tan eficiente, ya que si la lista es muy larga tardara un rato en realizar este proceso.
+
+
+
+------------------------------------------------------------------
+
+9.5.3 INSERCION DE UN NODO ENTE DOS NODOS DE LA LISTA <<LISTA ORDENADA >>
+
+se puede insertar un nodo entre 2 nodos, esto puede ser mas util cunado se trata de una lista que en cuneto se esta insertando va ordenada o si queremos insertar enter 2 nodos especificos. 
+
+esto se ve un poco mas en << listas doblmenete enlazadas >> 
+
+
+
+
+
+
 
 
 
